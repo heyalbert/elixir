@@ -8,6 +8,40 @@ Background research: [research/graal.md](research/graal.md), [research/graal-141
 
 ---
 
+## 0. Principles
+
+Filter for every spec and feature decision. Derived from Graal 1.41 (2000), modern Graal, and the forum pain points (see research docs).
+
+**Keep (what Graal got right)**
+1. **Create inside the world.** Edit the level you stand in and play-test instantly — no separate studio app, no build or publish wait.
+2. **Tiny first step.** A door, sign, shopkeeper or guard is a few lines. Depth sits behind the simple path, never in front of it.
+3. **Readable, remixable content.** Creators learn by reading others' work. Open and forkable with attribution by default; private as an option.
+4. **Small ownable units.** Chunks of 32×32 tiles that one person can understand and own; worlds composed from them.
+5. **Social life is the core game.** Identity, cosmetics, guilds, chat, PvP and social rules are first-class.
+6. **Instant start.** A world is a URL; plays in the browser with no install.
+
+**Change (what we do differently today)**
+7. **Server authority.** Shared logic runs on the server; client code is presentation and input. Client-writable data is typed untrusted.
+8. **Modern, typed scripting.** TypeScript with named event handlers, async/await, typed scoped state that syncs and persists automatically.
+9. **Data-driven content.** Items, enemies, damage rules, animations and PvP/social rules are definitions plus script hooks. The default kit is a forkable package, not engine code.
+10. **Touch-first, every device.** One web client; 32px tiles; touch, keyboard and controller; any screen size.
+11. **Versioned, collaborative tools.** Every change has history, rollback and branching; several creators edit live together.
+12. **Security by construction.** Rate limits, quotas, server-only permission checks, sanitised rich text, no device access, namespaced assets with provenance — enforced by the platform, not by human inspection.
+13. **Free start, transparent discovery.** Idle worlds cost nothing; discovery is metrics-based with published criteria.
+
+**Add (what didn't exist in 2000)**
+14. **AI assists creators** (script writing and explaining, style-locked sprite generation, NPC dialogue) — it never replaces authored content.
+15. **Share-by-link growth**, spectating and creator-facing analytics (retention, session length, drop-off points).
+16. **Creator economy designed in from day one** (ledger and attribution now, payouts later).
+17. **Accessibility and localisation from the start.**
+
+**Avoid**
+18. No full-engine-editor complexity on the default path.
+19. No lock-down that kills learning and remixing.
+20. No graphics investment ahead of creation ease.
+21. No scale or marketplace work before one world with ~50 players is fun.
+22. No AI-generated filler content.
+
 ## 1. Non-negotiables (the "spirit")
 
 1. The world is editable while it runs; scripts and levels hot-reload with players inside.
