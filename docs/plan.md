@@ -4,7 +4,7 @@ Status: planning, no code yet. Working name: TBD.
 
 Goal: a modern, browser- and mobile-first platform in the spirit of GraalOnline: a 2D top-down action MMORPG world that creators build live, with custom scripts and assets, and that players can use as a base to build their own games. Original name, art, default world and terminology; nothing from Graal or Nintendo.
 
-Background research: [research/graal.md](research/graal.md), [research/alttp.md](research/alttp.md).
+Background research: [research/graal.md](research/graal.md), [research/graal-141.md](research/graal-141.md), [research/alttp.md](research/alttp.md).
 
 ---
 
@@ -61,6 +61,9 @@ Background research: [research/graal.md](research/graal.md), [research/alttp.md]
 **Creator tools (inside the client, "edit mode")**
 - Tile painting with layers and tile-attribute painter, warp tool, object/NPC placement, animation editor, Monaco script editor with types, asset upload with validation (palette, grid, frame size, anchors), logs with stack traces, profiler.
 - Version history and rollback for every level and script; world branching/forking.
+- Creator loop from Graal 1.x: syntax check with highlighted errors, instant play-test, breakpoint debugger, state/flags inspector, path recording for NPC routes, multi-tile stamps, attribution metadata on every script/level/asset.
+- No-code on-ramp: NPC/enemy/item wizards that generate editable TypeScript.
+- Items, enemies and damage rules are data definitions with script hooks, never fixed engine enums.
 - Admin console (modern RC): roles with named rights + path-scoped permissions, bans, moderation rules, staff audit log.
 - Local CLI that syncs a world's scripts/assets to a folder for VS Code + Git users; published TypeScript API types.
 
