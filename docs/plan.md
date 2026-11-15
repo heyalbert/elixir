@@ -23,6 +23,7 @@ Background research: [research/graal.md](research/graal.md), [research/alttp.md]
 | # | Topic | Decision | Status |
 |---|---|---|---|
 | 1 | Tile size | **32px** tiles; character body ~32×48 in 64×64 animation frames; internal render ~640×360, integer scaling | **Decided** |
+| 1a | World units | 32×32-tile chunks (1024×1024 px) on a seamless map; 16px collision sub-cells; layers: ground, detail, objects, overhead, optional second floor plane (see research/alttp.md §10) | Proposed |
 | 2 | Backend | Elixir/OTP + Phoenix Channels | Proposed |
 | 3 | Scripting language | TypeScript, executed in sandboxed QuickJS (server: per-world runtime with CPU/memory quotas; client: QuickJS-WASM in a Web Worker) | Proposed |
 | 4 | Client | Phaser (or PixiJS + thin layer), HTML/React overlays for chat, menus and editor panels; PWA, then Capacitor for app stores | Proposed |
@@ -39,10 +40,11 @@ Background research: [research/graal.md](research/graal.md), [research/alttp.md]
 ## 3. Architecture
 
 **Server (Elixir/OTP)**
-- Supervision tree per world: world supervisor → chunk/instance processes (GenServer per 64×64-tile chunk or interior/dungeon instance) → player session processes → script runtime processes.
+- Supervision tree per world: world supervisor → chunk/instance processes (GenServer per 32×32-tile chunk or interior/dungeon instance) → player session processes → script runtime processes.
 - Transport: Phoenix Channels over WebSocket. Fan-out via Phoenix PubSub. Clustering via libcluster/Horde later.
 - Interest management: subscribe to current chunk + neighbours.
-- Tick rates: script loop 10 Hz (Graal's proven 0.1 s), network state 15–20 Hz.
+- Tick rates: client simulation fixed 60 Hz with interpolated rendering; server script loop 10 Hz (Graal's proven 0.1 s); network state 15–20 Hz.
+- State split: per-player flags (chests, keys, collectibles, secrets) vs shared world state (bushes, enemies, events); dungeons as per-party instances.
 - Authority: client-predicted movement validated by server (speed, collision, warps); combat, items, currency and all server-side script state authoritative.
 - Idle worlds hibernate (near-zero cost) → enables a free tier.
 
